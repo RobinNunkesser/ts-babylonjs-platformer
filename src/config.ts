@@ -6,13 +6,13 @@ export const PLATFORMER_CONFIG = {
   levelHeightRows: 14,     // VGLC Mario 1-1 hat 14 Zeilen
 
   // Kinematik & Physik
-  gravity: 30.0,           // Gravitationsbeschleunigung nach unten
-  maxRunSpeed: 7.5,        // Maximale Laufgeschwindigkeit
-  acceleration: 42.0,      // Bodenbeschleunigung
+  gravity: 28.0,           // Gravitationsbeschleunigung nach unten
+  maxRunSpeed: 8.5,        // Maximale Laufgeschwindigkeit
+  acceleration: 44.0,      // Bodenbeschleunigung
   friction: 14.0,          // Reibungsverzögerung
-  airControl: 0.65,        // Reduzierte Beschleunigung in der Luft
-  jumpForce: 13.5,         // Sprungimpuls
-  variableJumpCut: 0.45,   // Kappung bei frühem Loslassen der Sprungtaste
+  airControl: 0.75,        // Gute Kontrolle in der Luft
+  jumpForce: 16.2,         // Sprungimpuls: h_max = 16.2^2 / (2 * 28) = 4.68 Blöcke (überwindet 3- und 4-Block Röhren)
+  variableJumpCut: 0.5,    // Kappung bei frühem Loslassen der Sprungtaste
 
   // Game Feel Puffer
   coyoteTimeSec: 0.12,     // 120 ms Gnadenfrist nach Kante
