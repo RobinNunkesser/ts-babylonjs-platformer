@@ -1,0 +1,241 @@
+:root {
+  --bg-color: #0b0f19;
+  --text-main: #f8fafc;
+  --accent-gold: #f59e0b;
+  --accent-cyan: #38bdf8;
+  --accent-danger: #ef4444;
+  --accent-green: #10b981;
+  --glass-bg: rgba(15, 23, 42, 0.75);
+  --glass-border: rgba(56, 189, 248, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-color);
+  font-family: 'Outfit', sans-serif;
+  color: var(--text-main);
+}
+
+#game-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#renderCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+}
+
+/* --- HUD Top Bar --- */
+#hud {
+  position: absolute;
+  top: 1rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+  z-index: 10;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.75rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.hud-group {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.hud-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.hud-label {
+  color: #94a3b8;
+  font-size: 0.6rem;
+  letter-spacing: 0.05em;
+}
+
+.hud-value {
+  color: var(--accent-gold);
+  font-size: 0.9rem;
+}
+
+/* --- Overlays & Glass Cards --- */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(3, 7, 18, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 20;
+  transition: opacity 0.25s ease;
+}
+
+.overlay.hidden {
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+.card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 1rem;
+  padding: 2rem 2.5rem;
+  max-width: 480px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(56, 189, 248, 0.1);
+}
+
+.glow-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.25rem;
+  color: var(--accent-cyan);
+  text-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.glow-title.danger {
+  color: var(--accent-danger);
+  text-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
+}
+
+.glow-title.victory {
+  color: var(--accent-green);
+  text-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
+}
+
+.subtitle {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.instructions {
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  text-align: left;
+  line-height: 1.6;
+}
+
+.score-summary {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.8rem;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  color: var(--accent-gold);
+}
+
+/* --- Buttons --- */
+.btn-retro {
+  background: linear-gradient(135deg, #0284c7, #38bdf8);
+  color: #041226;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 1rem 1.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+  transition: transform 0.1s, box-shadow 0.2s;
+}
+
+.btn-retro:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(56, 189, 248, 0.6);
+}
+
+.btn-retro:active {
+  transform: translateY(1px);
+}
+
+/* --- Mobile Touch Controls --- */
+#mobile-controls {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+  z-index: 15;
+}
+
+.touch-cluster {
+  display: flex;
+  gap: 1rem;
+  pointer-events: auto;
+}
+
+.touch-btn {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background: rgba(30, 41, 59, 0.6);
+  border: 2px solid rgba(56, 189, 248, 0.4);
+  color: #f8fafc;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(4px);
+  touch-action: manipulation;
+}
+
+.touch-btn.jump {
+  width: 4.5rem;
+  height: 4.5rem;
+  background: rgba(245, 158, 11, 0.2);
+  border-color: rgba(245, 158, 11, 0.6);
+  font-size: 1rem;
+  font-family: 'Press Start 2P', monospace;
+}
+
+.touch-btn:active {
+  background: rgba(56, 189, 248, 0.4);
+  transform: scale(0.92);
+}
+
+@media (min-width: 1024px) {
+  #mobile-controls {
+    display: none;
+  }
+}

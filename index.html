@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>2.5D Babylon.js Platformer - Super Mario World 1-1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <div id="game-container">
+      <canvas id="renderCanvas"></canvas>
+
+      <!-- HUD Top Bar -->
+      <div id="hud">
+        <div class="hud-group">
+          <div class="hud-item">
+            <span class="hud-label">MARIO</span>
+            <span id="hud-score" class="hud-value">000000</span>
+          </div>
+          <div class="hud-item">
+            <span class="hud-label">COINS</span>
+            <span id="hud-coins" class="hud-value">×00</span>
+          </div>
+        </div>
+        <div class="hud-group">
+          <div class="hud-item">
+            <span class="hud-label">WORLD</span>
+            <span class="hud-value">1-1</span>
+          </div>
+          <div class="hud-item">
+            <span class="hud-label">TOP</span>
+            <span id="hud-highscore" class="hud-value">000000</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Start Overlay -->
+      <div id="overlay-start" class="overlay active">
+        <div class="card">
+          <h1 class="glow-title">SUPER MARIO 2.5D</h1>
+          <p class="subtitle">Babylon.js Tile-Platformer (VGLC World 1-1)</p>
+          <div class="instructions">
+            <p><strong>🎮 Steuerung:</strong></p>
+            <p>• <strong>A / D</strong> oder <strong>← / →</strong>: Laufen</p>
+            <p>• <strong>Leertaste / W / ↑</strong>: Springen (Höhe variiert mit Haltedauer)</p>
+            <p>• <strong>P</strong>: Pause</p>
+            <p>• <strong>R</strong>: Schneller Neustart</p>
+          </div>
+          <button id="btn-start" class="btn-retro">SPIEL STARTEN</button>
+        </div>
+      </div>
+
+      <!-- Pause Overlay -->
+      <div id="overlay-pause" class="overlay hidden">
+        <div class="card">
+          <h2 class="glow-title">PAUSE</h2>
+          <p class="subtitle">Drücke P zum Weiterspielen</p>
+          <button id="btn-resume" class="btn-retro">WEITERSPIELEN</button>
+        </div>
+      </div>
+
+      <!-- Game Over / Absturz Overlay -->
+      <div id="overlay-gameover" class="overlay hidden">
+        <div class="card">
+          <h2 class="glow-title danger">ABGESTURZT!</h2>
+          <p class="subtitle">In den Abgrund gefallen...</p>
+          <div class="score-summary">
+            <p>SCORE: <span id="gameover-score">0</span></p>
+            <p>MÜNZEN: <span id="gameover-coins">0</span></p>
+          </div>
+          <button id="btn-restart" class="btn-retro">ERNEUT VERSUCHEN</button>
+        </div>
+      </div>
+
+      <!-- Victory Overlay -->
+      <div id="overlay-victory" class="overlay hidden">
+        <div class="card">
+          <h2 class="glow-title victory">ZIEL ERREICHT!</h2>
+          <p class="subtitle">Fahnenmast in Welt 1-1 erklommen!</p>
+          <div class="score-summary">
+            <p>FINAL SCORE: <span id="victory-score">0</span></p>
+            <p>MÜNZEN: <span id="victory-coins">0</span></p>
+          </div>
+          <button id="btn-victory-restart" class="btn-retro">NOCHMAL SPIELEN</button>
+        </div>
+      </div>
+
+      <!-- Mobile Touch Controls -->
+      <div id="mobile-controls">
+        <div class="touch-cluster">
+          <button id="touch-left" class="touch-btn" aria-label="Links">◀</button>
+          <button id="touch-right" class="touch-btn" aria-label="Rechts">▶</button>
+        </div>
+        <div class="touch-cluster">
+          <button id="touch-jump" class="touch-btn jump" aria-label="Springen">JUMP</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
